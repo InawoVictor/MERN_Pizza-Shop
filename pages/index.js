@@ -10,6 +10,9 @@ import AddButton from "@/components/AddButton";
 export default function Home({pizzaList, admin}) {
 
   const [close, setClose] = useState(true)
+  if(!process.env.NEXT_PUBLIC_API_URL){
+    return null
+  }
 
   return (
     <div className={styles.container}>
@@ -35,7 +38,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
  
-  const res = await axios.get("http://localhost:3000/api/products") 
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`) 
 
   return{
     props:{

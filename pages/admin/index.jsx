@@ -12,7 +12,7 @@ const Index = ({orders, products}) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/api/products/${id}`)
+      const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`)
       setPizzaList(pizzaList.filter(pizza => pizza._id !== id))
     } catch (error) {
       
@@ -25,7 +25,7 @@ const Index = ({orders, products}) => {
     const currentStatus = item.status
 
     try {
-      const res = await axios.put(`http://localhost:3000/api/orders/${id}`, {
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/orders/${id}`, {
         status: currentStatus + 1
       });
       setOrderList([
@@ -134,8 +134,8 @@ export const getServerSideProps = async (ctx) => {
     }
   }
 
-  const productRes = await axios.get("http://localhost:3000/api/products");
-  const orderRes = await axios.get("http://localhost:3000/api/orders")
+  const productRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
+  const orderRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`)
 
   return {
     props: {
