@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { addProduct } from "@/redux/cartSlice";
+import { toast } from "react-toastify";
 
 const Product = ({pizza}) => {
   const [size, setSize] = useState(0);
@@ -39,6 +40,7 @@ const Product = ({pizza}) => {
 
   const handleClick = () => {
     dispatch(addProduct({...pizza, extras,price,quantity}))
+    toast.success("Pizza has been added to cart😊")
   }
 
   return (

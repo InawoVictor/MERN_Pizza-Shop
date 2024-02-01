@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import styles from "../styles/Navbar.module.css";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [showNav, setShowNav] = useState(false);
 
-    const quantity = useSelector(state => state.cart.quantity)
+  const quantity = useSelector(state => state.cart.quantity)
 
 
   return (
@@ -16,24 +18,50 @@ const Navbar = () => {
         </div>
         <div className={styles.texts}>
           <div className={styles.text}>ORDER NOW!</div>
-          <div className={styles.text}>012 345 678</div>
+          <div className={styles.text}>081 000 875 08</div>
         </div>
       </div>
       <div className={styles.item}>
-        <ul className={styles.list}>
+        <ul className={showNav === true ? `${styles.list} ${styles.show}` : styles.list}>
+          <div className={styles.burger} onClick={() => setShowNav(!showNav)}>
+            X &nbsp;
+          </div>
           <li className={styles.listItem}>
             <Link href="/">
             Homepage
             </Link>
           </li>
-          <li className={styles.listItem}>Products</li>
-          <li className={styles.listItem}>Menu</li>
-          <Image src="/img/logo.png" alt="" width="160" height="69" />
-          <li className={styles.listItem}>Events</li>
-          <li className={styles.listItem}>Blog</li>
-          <li className={styles.listItem}>Contact</li>
+          <li className={styles.listItem}>
+            <Link href="/">
+              Products
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/">
+              Menu
+            </Link>
+          </li>
+          <span className={styles.logo}>IVPizza</span>
+          <li className={styles.listItem}>
+            <Link href="/">
+              Events
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/">
+              Blog
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/">
+              Contact us
+            </Link>
+          </li>
         </ul>
       </div>
+        <div className={styles.burger} onClick={() => setShowNav(!showNav)}>
+          <i className="fa fa-hamburger"></i> &nbsp;
+        </div>
       <Link href="/cart">
         <div className={styles.item}>
           <div className={styles.cart}>
